@@ -91,23 +91,47 @@ const App = {
 
     renderHome() {
         this.updateSun();
-        const tasks = [
-            {id:'hanzi', icon:'📚', name:'识字'},
-            {id:'pinyin', icon:'🔤', name:'拼音'},
-            {id:'math', icon:'🧮', name:'数学思维'},
-            {id:'english', icon:'🗽', name:'英语'},
-            {id:'science', icon:'🔬', name:'科普'},
-            {id:'habit', icon:'⭐', name:'好习惯'},
-            {id:'picturebook', icon:'📖', name:'绘本'},
-            {id:'fitness', icon:'💪', name:'健身'},
+        // 排课表：每天=拼音/英语/数学；一三五=识字/科普/健身；二四六=绘本/习惯/思维
+        const dayOfWeek = new Date().getDay(); // 0=周日 1=周一 ... 6=周六
+        const everyday = [
+            {id:'pinyin', icon:'🔤', name:'拼音', label:'每日'},
+            {id:'english', icon:'🗽', name:'英语', label:'每日'},
+            {id:'math', icon:'🧮', name:'数学', label:'每日'},
         ];
+        const monWedFri = [
+            {id:'hanzi', icon:'📚', name:'识字', label:'一三五'},
+            {id:'science', icon:'🔬', name:'科普', label:'一三五'},
+            {id:'fitness', icon:'💪', name:'健身', label:'一三五'},
+        ];
+        const tueThuSat = [
+            {id:'picturebook', icon:'📖', name:'绘本', label:'二四六'},
+            {id:'habit', icon:'⭐', name:'习惯', label:'二四六'},
+            {id:'thinking', icon:'🧠', name:'思维', label:'二四六'},
+        ];
+        // 周日全部可选，显示一三五组
+        let rotation;
+        if (dayOfWeek === 1 || dayOfWeek === 3 || dayOfWeek === 5 || dayOfWeek === 0) {
+            rotation = monWedFri;
+        } else {
+            rotation = tueThuSat;
+        }
+        const tasks = [...everyday, ...rotation];
+
         document.getElementById('dailyTasks').innerHTML = tasks.map(t => {
             const done = this.state.tasksCompleted[t.id];
-            return `<div class="task-chip ${done ? 'done' : ''}" onclick="App.goto('${t.id === 'math' ? 'thinking' : t.id}')">
+            const gotoId = t.id === 'math' ? 'thinking' : t.id;
+            return `<div class="task-chip ${done ? 'done' : ''}" onclick="App.goto('${gotoId}')">
                 <div class="task-icon">${done ? '✅' : t.icon}</div>
                 <div class="task-name">${t.name}</div>
+                <div class="task-schedule">${t.label}</div>
             </div>`;
         }).join('');
+
+        // 显示今天星期几 + 课表说明
+        const weekNames = ['日','一','二','三','四','五','六'];
+        const todayLabel = `星期${weekNames[dayOfWeek]}`;
+        const scheduleNote = document.getElementById('scheduleNote');
+        if (scheduleNote) scheduleNote.innerHTML = `📅 今天${todayLabel} · 每日必做：拼音/英语/数学 · 今日轮换：${rotation.map(t=>t.name).join('、')}`;
 
         document.getElementById('homeRewards').innerHTML = REWARD_LIST.slice(0,2).map(r => {
             const can = this.state.sun >= r.cost;

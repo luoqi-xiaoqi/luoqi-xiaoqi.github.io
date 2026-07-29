@@ -346,6 +346,7 @@ body {
 .task-chip.done { background: #E8F5E9; border-color: var(--plant-green); }
 .task-chip .task-icon { font-size: 28px; margin-bottom: 6px; }
 .task-chip .task-name { font-size: 13px; font-weight: bold; color: var(--text-dark); }
+.task-chip .task-schedule { font-size: 10px; color: var(--text-light); margin-top: 2px; }
 
 /* 科普模块 */
 .science-card {
