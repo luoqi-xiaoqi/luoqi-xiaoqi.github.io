@@ -535,21 +535,119 @@ const App = {
     },
 
     // 电子宠物
+    renderCatSVG(mood) {
+        const eyes = {
+            idle:  `<ellipse cx="0" cy="0" rx="14" ry="16" fill="white"/><circle cx="0" cy="0" r="8" fill="#2E7D32"/><circle cx="3" cy="-4" r="3" fill="white"/>`,
+            feed:  `<ellipse cx="0" cy="0" rx="14" ry="16" fill="white"/><circle cx="0" cy="0" r="8" fill="#2E7D32"/><circle cx="3" cy="-4" r="3" fill="white"/>`,
+            play:  `<path d="M-14,-8 Q0,-18 14,-8" stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-14,-8 Q0,8 14,-8" fill="#2E7D32"/>`,
+            sleep: `<line x1="-12" y1="0" x2="12" y2="0" stroke="#2E7D32" stroke-width="4" stroke-linecap="round"/>`,
+            bath:  `<ellipse cx="0" cy="0" rx="14" ry="10" fill="white"/><circle cx="0" cy="0" r="5" fill="#2E7D32"/><circle cx="2" cy="-3" r="2" fill="white"/>`,
+            pet:   `<path d="M-14,-8 Q0,-18 14,-8" stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-14,-8 Q0,8 14,-8" fill="#2E7D32"/>`,
+        };
+        const mouth = {
+            idle:  `<path d="M-6,0 Q0,6 6,0" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+            feed:  `<ellipse cx="0" cy="6" rx="8" ry="10" fill="#FF5252"/>`,
+            play:  `<path d="M-8,2 Q0,10 8,2" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+            sleep: `<path d="M-6,4 Q0,8 6,4" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+            bath:  `<path d="M-5,3 Q0,6 5,3" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+            pet:   `<path d="M-6,2 Q0,10 6,2" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+        };
+        const blush = (mood === 'feed' || mood === 'bath' || mood === 'pet') ? 0.7 : 0;
+        return `<svg class="cat-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g class="cat-tail" style="transform-origin:160px 150px;">
+                <path d="M150,140 Q180,100 175,70 Q170,50 185,45" stroke="#E67E22" stroke-width="14" fill="none" stroke-linecap="round"/>
+                <path d="M150,140 Q180,100 175,70 Q170,50 185,45" stroke="#D35400" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="8 12"/>
+            </g>
+            <ellipse class="cat-body" cx="100" cy="155" rx="50" ry="35" fill="#FF8C42"/>
+            <ellipse cx="80" cy="165" rx="16" ry="10" fill="#F5F5F5" opacity="0.6"/>
+            <ellipse cx="120" cy="165" rx="16" ry="10" fill="#F5F5F5" opacity="0.6"/>
+            <g class="cat-ear-left">
+                <path d="M55,75 L42,30 L82,58 Z" fill="#FF8C42"/>
+                <path d="M56,68 L48,45 L72,60 Z" fill="#FFB6C1"/>
+            </g>
+            <g class="cat-ear-right">
+                <path d="M145,75 L158,30 L118,58 Z" fill="#FF8C42"/>
+                <path d="M144,68 L152,45 L128,60 Z" fill="#FFB6C1"/>
+            </g>
+            <g class="cat-head" style="transform-origin:100px 100px;">
+                <circle class="cat-face" cx="100" cy="100" r="55" fill="#FFA055"/>
+                <path d="M85,55 Q90,48 95,56" stroke="#E67E22" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M100,52 L100,64" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
+                <path d="M115,55 Q110,48 105,56" stroke="#E67E22" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M55,98 Q48,105 55,114" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M145,98 Q152,105 145,114" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <circle class="cat-blush-left" cx="70" cy="112" r="9" fill="#FFB6C1" opacity="${blush}" style="transition:opacity 0.3s"/>
+                <circle class="cat-blush-right" cx="130" cy="112" r="9" fill="#FFB6C1" opacity="${blush}" style="transition:opacity 0.3s"/>
+                <g class="cat-eye-left" style="transform-origin:80px 95px;" transform="translate(80,95)">${eyes[mood] || eyes.idle}</g>
+                <g class="cat-eye-right" style="transform-origin:120px 95px;" transform="translate(120,95)">${eyes[mood] || eyes.idle}</g>
+                <path class="cat-nose" d="M94,110 L106,110 L100,118 Z" fill="#FF6B9D"/>
+                <g class="cat-mouth" transform="translate(100,120)">${mouth[mood] || mouth.idle}</g>
+                <g stroke="#8B4513" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="45" y1="108" x2="68" y2="110"/>
+                    <line x1="45" y1="116" x2="68" y2="115"/>
+                    <line x1="155" y1="108" x2="132" y2="110"/>
+                    <line x1="155" y1="116" x2="132" y2="115"/>
+                </g>
+            </g>
+        </svg>`;
+    },
+
+    renderPetEffects(mood) {
+        if (mood === 'feed') {
+            const foods = ['🍖','🐟','🥛','🍪','🍗'];
+            return `<div class="pet-effect-layer"><span class="effect-food">${foods[Math.floor(Math.random()*foods.length)]}</span></div>`;
+        }
+        if (mood === 'play') {
+            return `<div class="pet-effect-layer"><span class="effect-ball">🎾</span></div>`;
+        }
+        if (mood === 'sleep') {
+            return `<div class="pet-effect-layer">
+                <span class="effect-zzz" style="left:55%;top:8%;">💤</span>
+                <span class="effect-zzz" style="left:60%;top:15%;animation-delay:0.7s;">💤</span>
+                <span class="effect-zzz" style="left:52%;top:12%;animation-delay:1.4s;">💤</span>
+            </div>`;
+        }
+        if (mood === 'bath') {
+            let bubbles = '';
+            for (let i = 0; i < 6; i++) {
+                const size = 8 + Math.floor(Math.random() * 16);
+                const left = 20 + Math.floor(Math.random() * 60);
+                const delay = (i * 0.25).toFixed(2);
+                bubbles += `<div class="effect-bubble" style="left:${left}%;width:${size}px;height:${size}px;animation-delay:${delay}s;"></div>`;
+            }
+            return `<div class="pet-effect-layer">${bubbles}</div>`;
+        }
+        if (mood === 'pet') {
+            return `<div class="pet-effect-layer">
+                <span class="effect-hand">🤚</span>
+                <span class="effect-heart" style="left:48%;top:18%;">💕</span>
+                <span class="effect-heart" style="left:55%;top:12%;animation-delay:0.5s;">💗</span>
+            </div>`;
+        }
+        return '';
+    },
+
     renderPet() {
         const p = this.state.pet;
+        const mood = p.mood || 'idle';
         document.getElementById('petContainer').innerHTML = `
-            <div class="pet-avatar">${p.emoji}</div>
-            <div class="pet-name">${p.name}</div>
-            <div class="pet-level">等级 ${p.level} · 成长值 ${p.growth}</div>
-            <div class="pet-stats">
-                ${this.renderPetStat('饱食度', p.hunger, '#FF8A65')}
-                ${this.renderPetStat('开心值', p.happiness, '#FFD54F')}
-                ${this.renderPetStat('精力值', p.energy, '#64B5F6')}
-                ${this.renderPetStat('清洁度', p.cleanliness, '#81C784')}
+            <div class="pet-stage">
+                <div class="pet-avatar pet-state--${mood}">
+                    ${this.renderCatSVG(mood)}
+                    ${this.renderPetEffects(mood)}
+                </div>
+                <div class="pet-name">${p.name}</div>
+                <div class="pet-level">等级 ${p.level} · 成长值 ${p.growth}</div>
+                <div class="pet-stats">
+                    ${this.renderPetStat('饱食度', p.hunger, '#FF8A65')}
+                    ${this.renderPetStat('开心值', p.happiness, '#FFD54F')}
+                    ${this.renderPetStat('精力值', p.energy, '#64B5F6')}
+                    ${this.renderPetStat('清洁度', p.cleanliness, '#81C784')}
+                </div>
+                <div class="pet-actions">${PET_ACTIONS.map(a => `<div class="pet-action" onclick="App.petAction('${a.id}')">
+                    <div class="action-icon">${a.icon}</div><div class="action-name">${a.name}</div>
+                </div>`).join('')}</div>
             </div>
-            <div class="pet-actions">${PET_ACTIONS.map(a => `<div class="pet-action" onclick="App.petAction('${a.id}')">
-                <div class="action-icon">${a.icon}</div><div class="action-name">${a.name}</div>
-            </div>`).join('')}</div>
         `;
     },
 
@@ -566,9 +664,17 @@ const App = {
         }
         p.growth += 5;
         if (p.growth >= p.level * 100) { p.level++; p.growth = 0; this.toast(`🎉 宠物升级到 ${p.level} 级！`); }
+        p.mood = action.state;
+        if (action.voice) this.speak(action.voice, 'zh-CN');
         this.addSun(3, `照顾宠物${action.name}`);
         this.saveData();
         this.renderPet();
+        if (this._petMoodTimer) clearTimeout(this._petMoodTimer);
+        this._petMoodTimer = setTimeout(() => {
+            p.mood = 'idle';
+            this.saveData();
+            this.renderPet();
+        }, 2000);
     },
 
     startPetLoop() {

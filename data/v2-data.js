@@ -404,7 +404,7 @@ const ENGLISH_THEMES = [
 // 电子宠物数据
 const PET_DATA = {
     name:'咪咪',
-    emoji:'🐱',
+    mood:'idle',
     level:1,
     hunger:80,
     happiness:80,
@@ -415,11 +415,11 @@ const PET_DATA = {
 
 // 电子宠物动作/食物
 const PET_ACTIONS = [
-    {id:'feed', name:'喂食', icon:'🍖', effect:{hunger:20, happiness:5, energy:5}},
-    {id:'play', name:'玩耍', icon:'🎾', effect:{happiness:20, hunger:-10, energy:-10}},
-    {id:'sleep', name:'睡觉', icon:'🛏️', effect:{energy:30, hunger:-5, happiness:5}},
-    {id:'bath', name:'洗澡', icon:'🛁', effect:{cleanliness:30, happiness:5}},
-    {id:'pet', name:'抚摸', icon:'👋', effect:{happiness:15, energy:5}},
+    {id:'feed', name:'喂食', icon:'🍖', effect:{hunger:20, happiness:5, energy:5}, voice:'喵呜，好好吃呀！', state:'feed'},
+    {id:'play', name:'玩耍', icon:'🎾', effect:{happiness:20, hunger:-10, energy:-10}, voice:'喵喵，好好玩呀！', state:'play'},
+    {id:'sleep', name:'睡觉', icon:'🛏️', effect:{energy:30, hunger:-5, happiness:5}, voice:'呼噜呼噜，好困呀~', state:'sleep'},
+    {id:'bath', name:'洗澡', icon:'🛁', effect:{cleanliness:30, happiness:5}, voice:'喵~香喷喷的！', state:'bath'},
+    {id:'pet', name:'抚摸', icon:'👋', effect:{happiness:15, energy:5}, voice:'咕噜咕噜，好舒服~', state:'pet'},
 ];
 
 // 汉字学习（保留原有）
