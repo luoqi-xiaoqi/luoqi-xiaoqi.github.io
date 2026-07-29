@@ -974,14 +974,69 @@ body {
 
 /* 响应式 */
 @media (max-width: 768px) {
-    .sidebar { width: 72px; padding: 10px 6px; }
-    .nav-item { min-height: 62px; padding: 8px 2px; font-size: 11px; }
+    .top-bar { height: 48px; padding: 0 14px; }
+    .top-bar .logo-icon { width: 34px; height: 34px; font-size: 20px; }
+    .top-bar .logo-text { font-size: 17px; }
+    .main-container { margin-top: 48px; min-height: calc(100vh - 48px); }
+    .sidebar { width: 76px; top: 48px; padding: 8px 4px; gap: 6px; }
+    .nav-item { min-height: 58px; padding: 6px 2px; font-size: 11px; gap: 2px; }
     .nav-item .nav-icon { font-size: 22px; }
-    .content-area { margin-left: 72px; padding: 12px; }
-    .pet-avatar { width: 140px; height: 140px; }
+    .content-area { margin-left: 76px; padding: 12px; min-height: calc(100vh - 48px); }
+    .card { padding: 14px; border-radius: 16px; }
+    .card-title { font-size: 15px; }
+    .card-subtitle { font-size: 11px; }
+    .page-title { font-size: 18px; margin-bottom: 12px; }
+    .hanzi-grid { grid-template-columns: repeat(4, 1fr); }
+    .hanzi-card { padding: 10px 6px; }
+    .hanzi-char { font-size: 32px; }
+    .hanzi-pinyin { font-size: 12px; }
+    .hanzi-read-btn { padding: 5px 0; font-size: 11px; }
+    .pinyin-grid { grid-template-columns: repeat(5, 1fr); }
+    .pinyin-card { padding: 8px 4px; }
+    .pinyin-letter { font-size: 22px; }
+    .pinyin-word { font-size: 14px; }
+    .english-words { grid-template-columns: repeat(3, 1fr); }
+    .daily-tasks { grid-template-columns: repeat(3, 1fr); }
+    .resource-grid { grid-template-columns: repeat(3, 1fr); }
+    .picturebook-list { grid-template-columns: repeat(3, 1fr); }
+    .book-card { padding: 12px 8px; }
+    .book-card .book-icon { font-size: 34px; }
+    .book-card .book-title { font-size: 13px; }
+    .math-question { padding: 10px; margin-bottom: 8px; }
+    .math-expression { font-size: 18px; }
+    .math-input { width: 56px; padding: 6px; font-size: 16px; }
+    .habit-card { padding: 12px; margin-bottom: 10px; }
+    .habit-icon { font-size: 22px; }
+    .habit-title { font-size: 15px; }
+    .habit-desc { font-size: 12px; }
+    .habit-subdesc { font-size: 11px; margin-bottom: 8px; }
+    .habit-item { padding: 9px; margin-bottom: 7px; }
+    .habit-item-name { font-size: 13px; }
+    .habit-btn { padding: 5px 12px; font-size: 12px; }
+    .fitness-card { padding: 9px; margin-bottom: 6px; }
+    .fitness-icon { width: 40px; height: 40px; font-size: 22px; }
+    .fitness-name { font-size: 14px; }
+    .fitness-detail { font-size: 11px; }
+    .food-card { padding: 9px; margin-bottom: 6px; }
+    .food-icon { width: 40px; height: 40px; font-size: 22px; }
+    .food-name { font-size: 14px; }
+    .food-desc { font-size: 11px; }
+    .memo-item { padding: 8px 10px; margin-bottom: 5px; }
+    .memo-check { font-size: 18px; }
+    .memo-text { font-size: 12px; }
+    .pet-container { padding: 16px; }
+    .pet-avatar { width: 150px; height: 150px; }
+    .pet-name { font-size: 18px; }
+    .pet-level { font-size: 12px; }
+    .pet-stats { grid-template-columns: repeat(4, 1fr); }
+    .pet-stat { padding: 8px; }
+    .pet-stat-value { font-size: 14px; }
     .pet-actions { grid-template-columns: repeat(5, 1fr); }
+    .pet-action { padding: 8px 2px; }
+    .pet-action .action-icon { font-size: 22px; }
+    .pet-action .action-name { font-size: 11px; }
+    .wrong-card { padding: 10px; margin-bottom: 8px; }
     .garden-stats { grid-template-columns: repeat(3, 1fr); }
-    .hanzi-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ==================== 平板适配 (iPad mini 等) ==================== */
