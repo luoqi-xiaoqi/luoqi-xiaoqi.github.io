@@ -685,6 +685,43 @@ const App = {
             speechSynthesis.speak(u);
         }
     },
+
+    exportData() {
+        const data = JSON.stringify(this.state);
+        const box = document.getElementById('dataTransferBox');
+        box.style.display = 'block';
+        box.value = data;
+        box.select();
+        try {
+            document.execCommand('copy');
+            this.toast('✅ 数据已导出并复制到剪贴板！');
+        } catch(e) {
+            this.toast('📋 数据已显示，请手动复制');
+        }
+    },
+
+    importData() {
+        const box = document.getElementById('dataTransferBox');
+        if (box.style.display === 'none' || !box.value.trim()) {
+            box.style.display = 'block';
+            box.focus();
+            this.toast('📋 请粘贴之前导出的数据到框中');
+            return;
+        }
+        try {
+            const data = JSON.parse(box.value.trim());
+            Object.assign(this.state, data);
+            this.saveData();
+            this.updateSun();
+            this.renderNav();
+            this.goto('home');
+            this.toast('✅ 数据导入成功！学习进度已恢复');
+            box.style.display = 'none';
+            box.value = '';
+        } catch(e) {
+            this.toast('❌ 数据格式错误，请检查粘贴的内容');
+        }
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => App.init());

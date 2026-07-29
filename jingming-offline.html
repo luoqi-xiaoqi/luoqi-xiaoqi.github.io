@@ -1196,6 +1196,23 @@ body {
                 </div>
                 <div id="homeRewards"></div>
             </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:#FFF3E0;">💾</div>
+                    <div><div class="card-title">数据备份</div><div class="card-subtitle">换设备或换链接时保存/恢复学习数据</div></div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+                    <button class="btn btn-blue" onclick="App.exportData()">📤 导出数据</button>
+                    <button class="btn btn-green" onclick="App.importData()">📥 导入数据</button>
+                </div>
+                <div style="margin-top:10px;font-size:12px;color:var(--text-light);line-height:1.6;">
+                    💡 <b>导出</b>：把当前学习数据复制到剪贴板<br>
+                    💡 <b>导入</b>：粘贴之前导出的数据，恢复进度<br>
+                    💡 换设备/换链接前先导出，到新设备上导入即可
+                </div>
+                <textarea id="dataTransferBox" style="display:none;width:100%;min-height:100px;margin-top:10px;font-size:11px;border-radius:8px;border:2px solid #E0E0E0;padding:8px;" placeholder="导出的数据会显示在这里，复制后到新设备粘贴导入..."></textarea>
+            </div>
+            </div>
         </div>
 
         <!-- 识字 -->
@@ -2582,6 +2599,43 @@ const App = {
             u.pitch = options.pitch ?? 1;
             if (options.voice) u.voice = options.voice;
             speechSynthesis.speak(u);
+        }
+    },
+
+    exportData() {
+        const data = JSON.stringify(this.state);
+        const box = document.getElementById('dataTransferBox');
+        box.style.display = 'block';
+        box.value = data;
+        box.select();
+        try {
+            document.execCommand('copy');
+            this.toast('✅ 数据已导出并复制到剪贴板！');
+        } catch(e) {
+            this.toast('📋 数据已显示，请手动复制');
+        }
+    },
+
+    importData() {
+        const box = document.getElementById('dataTransferBox');
+        if (box.style.display === 'none' || !box.value.trim()) {
+            box.style.display = 'block';
+            box.focus();
+            this.toast('📋 请粘贴之前导出的数据到框中');
+            return;
+        }
+        try {
+            const data = JSON.parse(box.value.trim());
+            Object.assign(this.state, data);
+            this.saveData();
+            this.updateSun();
+            this.renderNav();
+            this.goto('home');
+            this.toast('✅ 数据导入成功！学习进度已恢复');
+            box.style.display = 'none';
+            box.value = '';
+        } catch(e) {
+            this.toast('❌ 数据格式错误，请检查粘贴的内容');
         }
     },
 };
