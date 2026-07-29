@@ -985,70 +985,86 @@ body {
 }
 
 /* ==================== 平板适配 (iPad mini 等) ==================== */
-/* 平板竖屏 768px~1024px */
+/* 平板竖屏 768px~1024px（iPad mini 竖屏等） */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .sidebar { width: 88px; padding: 10px 4px; }
-    .nav-item { min-height: 66px; padding: 8px 2px; font-size: 12px; }
-    .nav-item .nav-icon { font-size: 24px; }
-    .content-area { margin-left: 88px; padding: 16px; }
-    .top-bar { padding: 0 16px; }
-    .logo-text { font-size: 20px; }
-    /* 内容卡片在平板上可以更宽 */
+    .top-bar { height: 48px; padding: 0 14px; }
+    .top-bar .logo-icon { width: 34px; height: 34px; font-size: 20px; }
+    .top-bar .logo-text { font-size: 17px; }
+    .main-container { margin-top: 48px; min-height: calc(100vh - 48px); }
+    .sidebar { width: 76px; top: 48px; padding: 8px 4px; gap: 6px; }
+    .nav-item { min-height: 58px; padding: 6px 2px; font-size: 11px; gap: 2px; }
+    .nav-item .nav-icon { font-size: 22px; }
+    .content-area { margin-left: 76px; padding: 12px; min-height: calc(100vh - 48px); }
+    .card { padding: 14px; border-radius: 16px; }
+    .card-header { gap: 8px; margin-bottom: 10px; }
+    .card-title { font-size: 15px; }
+    .card-subtitle { font-size: 11px; }
+    .page-title { font-size: 18px; margin-bottom: 12px; }
     .hanzi-grid { grid-template-columns: repeat(5, 1fr); }
     .pinyin-grid { grid-template-columns: repeat(6, 1fr); }
     .english-words { grid-template-columns: repeat(3, 1fr); }
     .daily-tasks { grid-template-columns: repeat(3, 1fr); }
     .resource-grid { grid-template-columns: repeat(3, 1fr); }
     .picturebook-list { grid-template-columns: repeat(3, 1fr); }
-    .pet-avatar { width: 170px; height: 170px; }
+    .pet-avatar { width: 150px; height: 150px; }
     .pet-stats { grid-template-columns: repeat(4, 1fr); }
     .pet-actions { grid-template-columns: repeat(5, 1fr); }
     .garden-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* 平板横屏 1025px~1366px, 高度≥768px */
+/* 平板横屏 1025px~1366px（iPad mini 横屏等） */
 @media (min-width: 1025px) and (max-width: 1366px) {
-    .sidebar { width: 96px; }
-    .nav-item { min-height: 70px; font-size: 13px; }
-    .nav-item .nav-icon { font-size: 26px; }
-    .content-area { margin-left: 96px; padding: 18px; }
+    .top-bar { height: 50px; padding: 0 16px; }
+    .top-bar .logo-icon { width: 36px; height: 36px; font-size: 21px; }
+    .top-bar .logo-text { font-size: 18px; }
+    .main-container { margin-top: 50px; min-height: calc(100vh - 50px); }
+    .sidebar { width: 82px; top: 50px; padding: 10px 5px; gap: 8px; }
+    .nav-item { min-height: 62px; padding: 7px 2px; font-size: 12px; gap: 3px; }
+    .nav-item .nav-icon { font-size: 23px; }
+    .content-area { margin-left: 82px; padding: 14px; min-height: calc(100vh - 50px); }
+    .card { padding: 16px; }
+    .page-title { font-size: 19px; margin-bottom: 14px; }
     .hanzi-grid { grid-template-columns: repeat(6, 1fr); }
     .pinyin-grid { grid-template-columns: repeat(8, 1fr); }
     .english-words { grid-template-columns: repeat(4, 1fr); }
     .daily-tasks { grid-template-columns: repeat(4, 1fr); }
     .resource-grid { grid-template-columns: repeat(3, 1fr); }
     .picturebook-list { grid-template-columns: repeat(4, 1fr); }
-    .pet-avatar { width: 190px; height: 190px; }
+    .pet-avatar { width: 160px; height: 160px; }
     .pet-stats { grid-template-columns: repeat(4, 1fr); }
     .pet-actions { grid-template-columns: repeat(5, 1fr); }
 }
 
 /* 平板横屏特殊：高度<500px（如iPad mini分屏模式） */
 @media (max-width: 1024px) and (orientation: landscape) and (max-height: 500px) {
+    .top-bar { height: 44px; }
+    .main-container { margin-top: 44px; min-height: calc(100vh - 44px); }
     .sidebar {
-        width: 100%; height: 56px;
-        top: 56px; left: 0; right: 0; bottom: auto;
+        width: 100%; height: 52px;
+        top: 44px; left: 0; right: 0; bottom: auto;
         flex-direction: row;
         overflow-x: auto;
         padding: 4px 6px;
     }
-    .nav-item { min-width: 64px; min-height: 44px; flex-direction: column; font-size: 10px; }
-    .nav-item .nav-icon { font-size: 20px; }
-    .content-area { margin-left: 0; margin-top: 56px; padding: 10px; }
-    .pet-avatar { width: 120px; height: 120px; }
+    .nav-item { min-width: 60px; min-height: 40px; flex-direction: column; font-size: 9px; }
+    .nav-item .nav-icon { font-size: 18px; }
+    .content-area { margin-left: 0; margin-top: 52px; padding: 10px; min-height: calc(100vh - 96px); }
+    .pet-avatar { width: 110px; height: 110px; }
 }
 
 /* 横屏优化 */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+    .top-bar { height: 44px; }
+    .main-container { margin-top: 44px; }
     .sidebar {
-        width: 100%; height: 60px;
-        top: 56px; left: 0; right: 0; bottom: auto;
+        width: 100%; height: 54px;
+        top: 44px; left: 0; right: 0; bottom: auto;
         flex-direction: row;
         overflow-x: auto;
-        padding: 6px;
+        padding: 5px;
     }
-    .nav-item { min-width: 70px; min-height: 48px; flex-direction: column; }
-    .content-area { margin-left: 0; margin-top: 60px; }
+    .nav-item { min-width: 66px; min-height: 42px; flex-direction: column; }
+    .content-area { margin-left: 0; margin-top: 54px; }
 }
 
 /* ==================== 健身饮食 ==================== */
