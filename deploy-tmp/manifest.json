@@ -1,0 +1,38 @@
+{
+  "name": "靖铭学习工作台",
+  "short_name": "靖铭学习",
+  "description": "植物大战僵尸主题学习平台 - 汉字、古诗、数学、拼音、英语、健身饮食",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#E1F5FE",
+  "theme_color": "#0288D1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "kids"],
+  "lang": "zh-CN"
+}

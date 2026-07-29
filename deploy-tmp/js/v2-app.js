@@ -173,11 +173,8 @@ const App = {
 
         document.getElementById('hanziGrid').innerHTML = dayHanzi.map(h => {
             const learned = this.state.learnedHanzi.includes(h.char);
-            return `<div class="hanzi-card ${learned ? 'learned' : ''}">
-                <div class="hanzi-char">${h.char}</div>
-                <div class="hanzi-pinyin">${h.pinyin}</div>
-                <div class="hanzi-meaning">${h.meaning}</div>
-                <div class="hanzi-read-btn" onclick="App.speakHanzi('${h.char}', this)">🔊 跟读</div>
+            return `<div class="hanzi-card ${learned ? 'learned' : ''}" onclick="App.speakHanzi('${h.char}', this)">
+                <div class="hanzi-char">${h.char}</div><div class="hanzi-pinyin">${h.pinyin}</div><div class="hanzi-meaning">${h.meaning}</div>
             </div>`;
         }).join('');
     },
@@ -185,9 +182,7 @@ const App = {
     changeDay(d) { this.state.currentDay = d; this.saveData(); this.renderHanzi(); },
 
     speakHanzi(char, el) {
-        const h = HANZI_LIST.find(x => x.char === char);
-        const text = h ? `${char}，${h.meaning}的${char}` : char;
-        this.speak(text, 'zh-CN');
+        this.speak(char, 'zh-CN');
         if (!this.state.learnedHanzi.includes(char)) {
             this.state.learnedHanzi.push(char);
             this.saveData();
@@ -195,11 +190,8 @@ const App = {
             this.renderHanzi();
             this.completeTask('hanzi');
         }
-        if (el) {
-            el.style.background = '#FFD54F';
-            el.style.color = 'white';
-            setTimeout(() => { el.style.background = ''; el.style.color = ''; }, 400);
-        }
+        el.style.transform = 'scale(1.1)';
+        setTimeout(() => el.style.transform = '', 200);
     },
 
     // 数学
@@ -277,35 +269,10 @@ const App = {
 
     // 拼音
     renderPinyin() {
-        document.getElementById('pinyinShengmu').innerHTML = PINYIN_DATA.声母.map(p => `<div class="pinyin-card" onclick="App.speakPinyin('${p.sound}','${p.word}','${p.pinyin}', this)">
-            <div class="pinyin-letter">${p.pinyin}</div>
-            <div class="pinyin-word">${p.word}</div>
-            <div class="pinyin-read-hint">👆点击跟读</div>
-        </div>`).join('');
-        document.getElementById('pinyinDanmu').innerHTML = PINYIN_DATA.单韵母.map(p => `<div class="pinyin-card" onclick="App.speakPinyin('${p.sound}','${p.word}','${p.pinyin}', this)">
-            <div class="pinyin-letter">${p.pinyin}</div>
-            <div class="pinyin-word">${p.word}</div>
-            <div class="pinyin-read-hint">👆点击跟读</div>
-        </div>`).join('');
-        document.getElementById('pinyinFu').innerHTML = PINYIN_DATA.复韵母.map(p => `<div class="pinyin-card focus" onclick="App.speakPinyin('${p.sound}','${p.word}','${p.pinyin}', this)">
-            <div class="pinyin-letter">${p.pinyin}</div>
-            <div class="pinyin-word">${p.word}</div>
-            <div style="font-size:11px;color:#B71C1C">${p.example}</div>
-            <div class="pinyin-read-hint">👆点击跟读</div>
-        </div>`).join('');
-        document.getElementById('pinyinBi').innerHTML = PINYIN_DATA.鼻韵母.map(p => `<div class="pinyin-card" onclick="App.speakPinyin('${p.sound}','${p.word}','${p.pinyin}', this)">
-            <div class="pinyin-letter">${p.pinyin}</div>
-            <div class="pinyin-word">${p.word}</div>
-            <div style="font-size:11px">${p.example}</div>
-            <div class="pinyin-read-hint">👆点击跟读</div>
-        </div>`).join('');
-    },
-
-    speakPinyin(sound, word, pinyin, el) {
-        this.speak(sound + '，' + sound, 'zh-CN');
-        el.style.transform = 'scale(1.1)';
-        el.style.background = '#FFF8E1';
-        setTimeout(() => { el.style.transform = ''; el.style.background = ''; }, 400);
+        document.getElementById('pinyinShengmu').innerHTML = PINYIN_DATA.声母.map(p => `<div class="pinyin-card" onclick="App.speak('${p}','zh-CN')">${p}</div>`).join('');
+        document.getElementById('pinyinDanmu').innerHTML = PINYIN_DATA.单韵母.map(p => `<div class="pinyin-card" onclick="App.speak('${p}','zh-CN')">${p}</div>`).join('');
+        document.getElementById('pinyinFu').innerHTML = PINYIN_DATA.复韵母.map(p => `<div class="pinyin-card focus" onclick="App.speak('${p.pinyin}','zh-CN')">${p.pinyin}<div style="font-size:11px;color:#B71C1C">${p.example}</div></div>`).join('');
+        document.getElementById('pinyinBi').innerHTML = PINYIN_DATA.鼻韵母.map(p => `<div class="pinyin-card" onclick="App.speak('${p.pinyin}','zh-CN')">${p.pinyin}<div style="font-size:11px">${p.example}</div></div>`).join('');
     },
 
     // 英语
@@ -314,33 +281,19 @@ const App = {
         const activeTheme = this.state.activeTheme || 'seasons';
         themes.innerHTML = ENGLISH_THEMES.map(t => `<button class="english-theme-btn ${t.id===activeTheme?'active':''}" onclick="App.selectTheme('${t.id}')">${t.icon} ${t.title}</button>`).join('');
         const theme = ENGLISH_THEMES.find(t => t.id === activeTheme);
-        document.getElementById('englishWords').innerHTML = theme.words.map(w => `<div class="english-word-card">
-            <div class="word-icon">${w.icon}</div>
-            <div class="word-en">${w.word}</div>
-            <div class="word-cn">${w.cn}</div>
-            <div class="word-sentence">${w.sentence}</div>
-            <div class="english-read-btns">
-                <button class="read-btn read-word" onclick="App.speakEnglish('${w.word}', 'word', this)">🔊 读单词</button>
-                <button class="read-btn read-sentence" onclick="App.speakEnglish('${w.sentence}', 'sentence', this)">🔊 读句子</button>
-            </div>
+        document.getElementById('englishWords').innerHTML = theme.words.map(w => `<div class="english-word-card" onclick="App.speakEnglish('${w.word}', '${w.sentence}', this)">
+            <div class="word-icon">${w.icon}</div><div class="word-en">${w.word}</div><div class="word-cn">${w.cn}</div><div class="word-sentence">${w.sentence}</div>
         </div>`).join('');
     },
 
     selectTheme(id) { this.state.activeTheme = id; this.saveData(); this.renderEnglish(); },
 
-    speakEnglish(text, type, el) {
-        this.speak(text, 'en-US');
-        if (type === 'word') {
-            this.addSun(1, `跟读单词`);
-        } else {
-            this.addSun(2, `跟读句子`);
-        }
+    speakEnglish(word, sentence, el) {
+        this.speak(word, 'en-US');
+        this.addSun(1, `跟读${word}`);
         this.completeTask('english');
-        if (el) {
-            el.style.background = '#42A5F5';
-            el.style.color = 'white';
-            setTimeout(() => { el.style.background = ''; el.style.color = ''; }, 400);
-        }
+        el.style.transform = 'scale(1.05)';
+        setTimeout(() => el.style.transform = '', 200);
     },
 
     // 习惯
