@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#66BB6A">
+    <meta name="apple-mobile-web-app-title" content="靖铭学习">
+    <meta name="description" content="靖铭学习工作台 - 花园主题学习平台">
+    <title>靖铭学习工作台 🌻</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/v2-style.css">
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<div class="top-bar">
+    <div class="logo">
+        <div class="logo-icon">🌻</div>
+        <div class="logo-text">靖铭学习工作台</div>
+    </div>
+    <div class="user-info">
+        <div class="sun-counter">
+            <div class="sun-icon"></div>
+            <span id="sunCount">0</span>
+        </div>
+    </div>
+</div>
+
+<div class="main-container">
+    <!-- 左侧导航 -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <!-- 内容区 -->
+    <div class="content-area">
+
+        <!-- 花园首页 -->
+        <div class="content-section active" id="section-home">
+            <div class="page-title"><span class="icon">🌻</span> 我的花园</div>
+            <div class="garden-stats">
+                <div class="stat-card"><div class="stat-icon">☀️</div><div class="stat-value" id="homeSun">0</div><div class="stat-label">阳光</div></div>
+                <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value" id="homeStar">0</div><div class="stat-label">星星</div></div>
+                <div class="stat-card"><div class="stat-icon">🌱</div><div class="stat-value" id="homeDay">1</div><div class="stat-label">学习天数</div></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:#FFF3E0;">📋</div>
+                    <div><div class="card-title">今日学习任务</div><div class="card-subtitle">完成学习获得阳光，布置你的花园</div></div>
+                </div>
+                <div class="daily-tasks" id="dailyTasks"></div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:#E8F5E9;">📦</div>
+                    <div><div class="card-title">今日配套资源</div><div class="card-subtitle">点击开始学习</div></div>
+                </div>
+                <div class="resource-grid">
+                    <div class="resource-btn" onclick="App.goto('english')">🎵 英语儿歌</div>
+                    <div class="resource-btn" onclick="App.goto('thinking')">🧩 思维游戏</div>
+                    <div class="resource-btn" onclick="App.goto('hanzi')">✏️ 识字动画</div>
+                    <div class="resource-btn" onclick="App.goto('picturebook')">📖 绘本故事</div>
+                    <div class="resource-btn" onclick="App.goto('science')">🔬 科普小课堂</div>
+                    <div class="resource-btn" onclick="App.goto('habit')">⭐ 好习惯打卡</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:#E3F2FD;">🎁</div>
+                    <div><div class="card-title">奖励中心</div><div class="card-subtitle">用阳光兑换奖励</div></div>
+                </div>
+                <div id="homeRewards"></div>
+            </div>
+        </div>
+
+        <!-- 识字 -->
+        <div class="content-section" id="section-hanzi">
+            <div class="page-title"><span class="icon">📚</span> 识字学习</div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon" style="background:#E3F2FD;">📝</div>
+                    <div><div class="card-title">每日识字</div><div class="card-subtitle">点击汉字听发音，学会更多汉字</div></div>
+                </div>
+                <div style="margin-bottom:12px;">
+                    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-medium);margin-bottom:6px;">
+                        <span>学习进度</span><span id="hanziProgressText">0 / 300 字</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="hanziProgress" style="width:0%"></div></div>
+                </div>
+                <div id="daySelector" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;"></div>
+                <div class="hanzi-grid" id="hanziGrid"></div>
+            </div>
+        </div>
+
+        <!-- 数学思维 -->
+        <div class="content-section" id="section-thinking">
+            <div class="page-title"><span class="icon">🧠</span> 思维训练</div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#E3F2FD;">➕</div><div><div class="card-title">加减法练习</div><div class="card-subtitle">算得又快又准</div></div></div>
+                <div id="mathAddition"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#E8F5E9;">✖️</div><div><div class="card-title">99乘法表</div><div class="card-subtitle">熟练掌握乘法</div></div></div>
+                <div id="mathMul99"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#F3E5F5;">💡</div><div><div class="card-title">思维拓展题</div><div class="card-subtitle">找规律、逻辑推理</div></div></div>
+                <div id="puzzleList"></div>
+            </div>
+            <div style="text-align:center;margin-bottom:16px;"><button class="btn btn-blue" onclick="App.refreshMath()">🔄 换一批题目</button></div>
+        </div>
+
+        <!-- 拼音 -->
+        <div class="content-section" id="section-pinyin">
+            <div class="page-title"><span class="icon">🔤</span> 拼音学习</div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">📢</div><div><div class="card-title">声母</div></div></div><div class="pinyin-grid" id="pinyinShengmu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">🔊</div><div><div class="card-title">单韵母</div></div></div><div class="pinyin-grid" id="pinyinDanmu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#FFCDD2;">⭐</div><div><div class="card-title">复韵母（重点）</div></div></div><div class="pinyin-grid" id="pinyinFu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">👃</div><div><div class="card-title">鼻韵母</div></div></div><div class="pinyin-grid" id="pinyinBi"></div></div>
+        </div>
+
+        <!-- 英语 -->
+        <div class="content-section" id="section-english">
+            <div class="page-title"><span class="icon">🗽</span> 英语学习</div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#E3F2FD;">🎨</div><div><div class="card-title">主题单词</div><div class="card-subtitle">点击单词听发音</div></div></div>
+                <div class="english-themes" id="englishThemes"></div>
+                <div class="english-words" id="englishWords"></div>
+            </div>
+        </div>
+
+        <!-- 习惯 -->
+        <div class="content-section" id="section-habit">
+            <div class="page-title"><span class="icon">⭐</span> 好习惯小卫士</div>
+            <div id="habitList"></div>
+        </div>
+
+        <!-- 绘本 -->
+        <div class="content-section" id="section-picturebook">
+            <div class="page-title"><span class="icon">📖</span> 绘本故事</div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#FFF8E1;">📚</div><div><div class="card-title">选择绘本</div><div class="card-subtitle">点击绘本开始阅读</div></div></div>
+                <div class="picturebook-list" id="picturebookList"></div>
+            </div>
+            <div class="book-reader" id="bookReader" style="display:none;">
+                <div style="font-size:18px;font-weight:bold;margin-bottom:12px;text-align:center;" id="readerTitle"></div>
+                <div class="book-page" id="readerPage"></div>
+                <div class="book-controls">
+                    <button class="btn btn-blue" onclick="App.prevPage()">⬅️ 上一页</button>
+                    <button class="btn btn-green" onclick="App.speakBook()">🔊 听故事</button>
+                    <button class="btn btn-yellow" onclick="App.nextPage()">下一页 ➡️</button>
+                </div>
+                <div style="text-align:center;margin-top:12px;"><button class="btn btn-coral" onclick="App.closeBook()">📚 返回绘本列表</button></div>
+            </div>
+        </div>
+
+        <!-- 科普 -->
+        <div class="content-section" id="section-science">
+            <div class="page-title"><span class="icon">🔬</span> 每日科普小课堂</div>
+            <div class="science-card" id="scienceCard"></div>
+            <div class="bottom-controls">
+                <button class="control-btn btn-green" onclick="App.completeScience()">✅ 完成</button>
+                <button class="control-btn btn-blue" onclick="App.speakScience()">🔊 听科普</button>
+                <button class="control-btn btn-yellow" onclick="App.nextScience()">🔄 换一个</button>
+            </div>
+        </div>
+
+        <!-- 电子宠物 -->
+        <div class="content-section" id="section-pet">
+            <div class="page-title"><span class="icon">🐱</span> 我的电子宠物</div>
+            <div class="pet-container" id="petContainer"></div>
+        </div>
+
+        <!-- 错题 -->
+        <div class="content-section" id="section-wrong">
+            <div class="page-title"><span class="icon">📝</span> 错题本</div>
+            <div id="wrongList"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- 奖励弹窗 -->
+<div class="modal-overlay" id="rewardModal">
+    <div class="modal-content">
+        <div style="font-size:48px;margin-bottom:8px;" id="rewardModalIcon">🎉</div>
+        <div style="font-size:20px;font-weight:bold;color:var(--text-dark);margin-bottom:8px;">恭喜获得奖励！</div>
+        <div style="color:var(--text-medium);margin-bottom:20px;" id="rewardModalMsg"></div>
+        <button class="btn btn-yellow" onclick="App.closeRewardModal()">太棒了！</button>
+    </div>
+</div>
+
+<script src="data/v2-data.js"></script>
+<script src="js/v2-app.js"></script>
+</body>
+</html>

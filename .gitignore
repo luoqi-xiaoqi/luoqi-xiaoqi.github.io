@@ -1,0 +1,13 @@
+.netlify/
+jingming-study/
+jingming-single.html
+deploy-github-pages.sh
+deploy-guide.html
+open-on-phone.html
+keep-alive.sh
+qr-code.png
+qr-code-permanent.png
+README.md
+css/style.css
+js/app.js
+data/study-data.js
