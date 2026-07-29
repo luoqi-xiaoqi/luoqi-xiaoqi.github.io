@@ -575,27 +575,19 @@ body {
     animation: none;
 }
 
-.cat-svg {
+.cat-img {
     width: 100%;
     height: 100%;
-    overflow: visible;
+    object-fit: cover;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    user-select: none;
+    -webkit-user-drag: none;
 }
-
-/* 基础眨眼 */
-@keyframes catBlink {
-    0%, 90%, 100% { transform: scaleY(1); }
-    93%, 97% { transform: scaleY(0.1); }
-}
-.pet-avatar .cat-eye-left,
-.pet-avatar .cat-eye-right {
-    transform-origin: center;
-    animation: catBlink 4s ease-in-out infinite;
-}
-.pet-state--sleep .cat-eye-left,
-.pet-state--sleep .cat-eye-right { animation: none; }
 
 /* 喂食态 */
-.pet-state--feed .cat-head { animation: catFeedHead 0.6s ease; }
+.pet-state--feed .cat-img { animation: catFeedHead 0.6s ease; }
 @keyframes catFeedHead {
     0%, 100% { transform: rotate(0deg) translateY(0); }
     50% { transform: rotate(-3deg) translateY(3px); }
@@ -614,17 +606,12 @@ body {
 }
 
 /* 玩耍态 */
-.pet-state--play .cat-svg { animation: catPlayWiggle 0.5s ease-in-out infinite; }
+.pet-state--play .cat-img { animation: catPlayWiggle 0.5s ease-in-out infinite; }
 @keyframes catPlayWiggle {
     0%, 100% { transform: rotate(-5deg) translateY(0); }
     25% { transform: rotate(0deg) translateY(-12px); }
     50% { transform: rotate(5deg) translateY(0); }
     75% { transform: rotate(0deg) translateY(-12px); }
-}
-.pet-state--play .cat-tail { animation: catTailWag 0.3s ease-in-out infinite; }
-@keyframes catTailWag {
-    0%, 100% { transform: rotate(-15deg); }
-    50% { transform: rotate(15deg); }
 }
 @keyframes ballBounce {
     0%, 100% { transform: translateY(0); }
@@ -640,7 +627,7 @@ body {
 }
 
 /* 睡觉态 */
-.pet-state--sleep .cat-svg {
+.pet-state--sleep .cat-img {
     animation: catSleepBreath 3s ease-in-out infinite;
 }
 @keyframes catSleepBreath {
@@ -660,7 +647,7 @@ body {
 }
 
 /* 洗澡态 */
-.pet-state--bath .cat-svg { animation: catBathShake 1s ease-in-out infinite; }
+.pet-state--bath .cat-img { animation: catBathShake 1s ease-in-out infinite; }
 @keyframes catBathShake {
     0%, 100% { transform: rotate(-2deg); }
     50% { transform: rotate(2deg); }
@@ -681,7 +668,7 @@ body {
 }
 
 /* 抚摸态 */
-.pet-state--pet .cat-head { animation: catPetLean 0.8s ease-in-out; }
+.pet-state--pet .cat-img { animation: catPetLean 0.8s ease-in-out; }
 @keyframes catPetLean {
     0%, 100% { transform: rotate(0deg); }
     50% { transform: rotate(5deg); }

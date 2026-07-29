@@ -535,61 +535,8 @@ const App = {
     },
 
     // 电子宠物
-    renderCatSVG(mood) {
-        const eyes = {
-            idle:  `<ellipse cx="0" cy="0" rx="14" ry="16" fill="white"/><circle cx="0" cy="0" r="8" fill="#2E7D32"/><circle cx="3" cy="-4" r="3" fill="white"/>`,
-            feed:  `<ellipse cx="0" cy="0" rx="14" ry="16" fill="white"/><circle cx="0" cy="0" r="8" fill="#2E7D32"/><circle cx="3" cy="-4" r="3" fill="white"/>`,
-            play:  `<path d="M-14,-8 Q0,-18 14,-8" stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-14,-8 Q0,8 14,-8" fill="#2E7D32"/>`,
-            sleep: `<line x1="-12" y1="0" x2="12" y2="0" stroke="#2E7D32" stroke-width="4" stroke-linecap="round"/>`,
-            bath:  `<ellipse cx="0" cy="0" rx="14" ry="10" fill="white"/><circle cx="0" cy="0" r="5" fill="#2E7D32"/><circle cx="2" cy="-3" r="2" fill="white"/>`,
-            pet:   `<path d="M-14,-8 Q0,-18 14,-8" stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-14,-8 Q0,8 14,-8" fill="#2E7D32"/>`,
-        };
-        const mouth = {
-            idle:  `<path d="M-6,0 Q0,6 6,0" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-            feed:  `<ellipse cx="0" cy="6" rx="8" ry="10" fill="#FF5252"/>`,
-            play:  `<path d="M-8,2 Q0,10 8,2" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-            sleep: `<path d="M-6,4 Q0,8 6,4" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-            bath:  `<path d="M-5,3 Q0,6 5,3" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-            pet:   `<path d="M-6,2 Q0,10 6,2" stroke="#AD1457" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-        };
-        const blush = (mood === 'feed' || mood === 'bath' || mood === 'pet') ? 0.7 : 0;
-        return `<svg class="cat-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <g class="cat-tail" style="transform-origin:160px 150px;">
-                <path d="M150,140 Q180,100 175,70 Q170,50 185,45" stroke="#E67E22" stroke-width="14" fill="none" stroke-linecap="round"/>
-                <path d="M150,140 Q180,100 175,70 Q170,50 185,45" stroke="#D35400" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="8 12"/>
-            </g>
-            <ellipse class="cat-body" cx="100" cy="155" rx="50" ry="35" fill="#FF8C42"/>
-            <ellipse cx="80" cy="165" rx="16" ry="10" fill="#F5F5F5" opacity="0.6"/>
-            <ellipse cx="120" cy="165" rx="16" ry="10" fill="#F5F5F5" opacity="0.6"/>
-            <g class="cat-ear-left">
-                <path d="M55,75 L42,30 L82,58 Z" fill="#FF8C42"/>
-                <path d="M56,68 L48,45 L72,60 Z" fill="#FFB6C1"/>
-            </g>
-            <g class="cat-ear-right">
-                <path d="M145,75 L158,30 L118,58 Z" fill="#FF8C42"/>
-                <path d="M144,68 L152,45 L128,60 Z" fill="#FFB6C1"/>
-            </g>
-            <g class="cat-head" style="transform-origin:100px 100px;">
-                <circle class="cat-face" cx="100" cy="100" r="55" fill="#FFA055"/>
-                <path d="M85,55 Q90,48 95,56" stroke="#E67E22" stroke-width="4" fill="none" stroke-linecap="round"/>
-                <path d="M100,52 L100,64" stroke="#E67E22" stroke-width="4" stroke-linecap="round"/>
-                <path d="M115,55 Q110,48 105,56" stroke="#E67E22" stroke-width="4" fill="none" stroke-linecap="round"/>
-                <path d="M55,98 Q48,105 55,114" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <path d="M145,98 Q152,105 145,114" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
-                <circle class="cat-blush-left" cx="70" cy="112" r="9" fill="#FFB6C1" opacity="${blush}" style="transition:opacity 0.3s"/>
-                <circle class="cat-blush-right" cx="130" cy="112" r="9" fill="#FFB6C1" opacity="${blush}" style="transition:opacity 0.3s"/>
-                <g class="cat-eye-left" style="transform-origin:80px 95px;" transform="translate(80,95)">${eyes[mood] || eyes.idle}</g>
-                <g class="cat-eye-right" style="transform-origin:120px 95px;" transform="translate(120,95)">${eyes[mood] || eyes.idle}</g>
-                <path class="cat-nose" d="M94,110 L106,110 L100,118 Z" fill="#FF6B9D"/>
-                <g class="cat-mouth" transform="translate(100,120)">${mouth[mood] || mouth.idle}</g>
-                <g stroke="#8B4513" stroke-width="1.5" stroke-linecap="round">
-                    <line x1="45" y1="108" x2="68" y2="110"/>
-                    <line x1="45" y1="116" x2="68" y2="115"/>
-                    <line x1="155" y1="108" x2="132" y2="110"/>
-                    <line x1="155" y1="116" x2="132" y2="115"/>
-                </g>
-            </g>
-        </svg>`;
+    renderCatImage(mood) {
+        return `<img class="cat-img" src="images/cat-mimi.jpg" alt="咪咪" draggable="false">`;
     },
 
     renderPetEffects(mood) {
@@ -633,7 +580,7 @@ const App = {
         document.getElementById('petContainer').innerHTML = `
             <div class="pet-stage">
                 <div class="pet-avatar pet-state--${mood}">
-                    ${this.renderCatSVG(mood)}
+                    ${this.renderCatImage(mood)}
                     ${this.renderPetEffects(mood)}
                 </div>
                 <div class="pet-name">${p.name}</div>
@@ -665,7 +612,7 @@ const App = {
         p.growth += 5;
         if (p.growth >= p.level * 100) { p.level++; p.growth = 0; this.toast(`🎉 宠物升级到 ${p.level} 级！`); }
         p.mood = action.state;
-        if (action.voice) this.speak(action.voice, 'zh-CN');
+        if (action.voice) this.speak(action.voice, 'zh-CN', {pitch: 1.4, rate: 0.8});
         this.addSun(3, `照顾宠物${action.name}`);
         this.saveData();
         this.renderPet();
@@ -728,11 +675,13 @@ const App = {
         }
     },
 
-    speak(text, lang) {
+    speak(text, lang, options = {}) {
         if ('speechSynthesis' in window) {
             const u = new SpeechSynthesisUtterance(text);
             u.lang = lang;
-            u.rate = 0.85;
+            u.rate = options.rate ?? 0.85;
+            u.pitch = options.pitch ?? 1;
+            if (options.voice) u.voice = options.voice;
             speechSynthesis.speak(u);
         }
     },
