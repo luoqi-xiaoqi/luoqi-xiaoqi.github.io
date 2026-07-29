@@ -822,3 +822,84 @@ body {
     .nav-item { min-width: 70px; min-height: 48px; flex-direction: column; }
     .content-area { margin-left: 0; margin-top: 60px; }
 }
+
+/* ==================== 健身饮食 ==================== */
+.fitness-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 14px;
+    border: 2px solid var(--mint-border, #C8E6C9);
+    transition: transform .2s;
+}
+.fitness-card:hover { transform: scale(1.02); }
+.fitness-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+.fitness-info { flex: 1; }
+.fitness-name { font-size: 16px; font-weight: bold; color: var(--text-dark); }
+.fitness-detail { font-size: 13px; color: var(--text-medium); margin-top: 2px; }
+
+.food-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 14px;
+    border: 2px solid #FFE0B2;
+    transition: transform .2s;
+}
+.food-card:hover { transform: scale(1.02); }
+.food-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    background: #FFF3E0;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+.food-info { flex: 1; }
+.food-name { font-size: 16px; font-weight: bold; color: var(--text-dark); }
+.food-desc { font-size: 13px; color: var(--text-medium); margin-top: 2px; }
+
+/* ==================== 备忘录 ==================== */
+.memo-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #E0E0E0;
+    border-radius: 3px;
+    margin: 8px 0;
+    overflow: hidden;
+}
+.memo-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #66BB6A, #FFD54F);
+    border-radius: 3px;
+    transition: width .3s;
+}
+.memo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    background: #FAFAFA;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+    cursor: pointer;
+    transition: all .2s;
+}
+.memo-item:hover { background: #F5F5F5; }
+.memo-item.done { background: #E8F5E9; border-color: #A5D6A7; }
+.memo-check { font-size: 22px; flex-shrink: 0; }
+.memo-text { font-size: 14px; color: var(--text-dark); }
+.memo-text-done { text-decoration: line-through; color: var(--text-light); }

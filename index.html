@@ -61,12 +61,15 @@
                     <div><div class="card-title">今日配套资源</div><div class="card-subtitle">点击开始学习</div></div>
                 </div>
                 <div class="resource-grid">
+                    <div class="resource-btn" onclick="App.goto('pinyin')">🔤 拼音学习</div>
                     <div class="resource-btn" onclick="App.goto('english')">🎵 英语儿歌</div>
                     <div class="resource-btn" onclick="App.goto('thinking')">🧩 思维游戏</div>
                     <div class="resource-btn" onclick="App.goto('hanzi')">✏️ 识字动画</div>
                     <div class="resource-btn" onclick="App.goto('picturebook')">📖 绘本故事</div>
                     <div class="resource-btn" onclick="App.goto('science')">🔬 科普小课堂</div>
                     <div class="resource-btn" onclick="App.goto('habit')">⭐ 好习惯打卡</div>
+                    <div class="resource-btn" onclick="App.goto('fitness')">💪 长高运动</div>
+                    <div class="resource-btn" onclick="App.goto('memo')">📋 入学准备</div>
                 </div>
             </div>
             <div class="card">
@@ -115,15 +118,6 @@
             <div style="text-align:center;margin-bottom:16px;"><button class="btn btn-blue" onclick="App.refreshMath()">🔄 换一批题目</button></div>
         </div>
 
-        <!-- 拼音 -->
-        <div class="content-section" id="section-pinyin">
-            <div class="page-title"><span class="icon">🔤</span> 拼音学习</div>
-            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">📢</div><div><div class="card-title">声母</div></div></div><div class="pinyin-grid" id="pinyinShengmu"></div></div>
-            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">🔊</div><div><div class="card-title">单韵母</div></div></div><div class="pinyin-grid" id="pinyinDanmu"></div></div>
-            <div class="card"><div class="card-header"><div class="card-icon" style="background:#FFCDD2;">⭐</div><div><div class="card-title">复韵母（重点）</div></div></div><div class="pinyin-grid" id="pinyinFu"></div></div>
-            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">👃</div><div><div class="card-title">鼻韵母</div></div></div><div class="pinyin-grid" id="pinyinBi"></div></div>
-        </div>
-
         <!-- 英语 -->
         <div class="content-section" id="section-english">
             <div class="page-title"><span class="icon">🗽</span> 英语学习</div>
@@ -168,6 +162,48 @@
                 <button class="control-btn btn-blue" onclick="App.speakScience()">🔊 听科普</button>
                 <button class="control-btn btn-yellow" onclick="App.nextScience()">🔄 换一个</button>
             </div>
+        </div>
+
+        <!-- 拼音 -->
+        <div class="content-section" id="section-pinyin">
+            <div class="page-title"><span class="icon">🔤</span> 拼音学习</div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">📢</div><div><div class="card-title">声母（23个）</div><div class="card-subtitle">点击听发音</div></div></div><div class="pinyin-grid" id="pinyinShengmu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">🔊</div><div><div class="card-title">单韵母（6个）</div><div class="card-subtitle">a o e i u ü</div></div></div><div class="pinyin-grid" id="pinyinDanmu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#FFCDD2;">⭐</div><div><div class="card-title">复韵母（重点学习）</div><div class="card-subtitle">ai ei ui ao ou iu ie üe er</div></div></div><div class="pinyin-grid" id="pinyinFu"></div></div>
+            <div class="card"><div class="card-header"><div class="card-icon" style="background:#E3F2FD;">👃</div><div><div class="card-title">鼻韵母</div><div class="card-subtitle">前鼻音 & 后鼻音</div></div></div><div class="pinyin-grid" id="pinyinBi"></div></div>
+        </div>
+
+        <!-- 健身饮食 -->
+        <div class="content-section" id="section-fitness">
+            <div class="page-title"><span class="icon">💪</span> 健康成长</div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#E8F5E9;">🏃</div><div><div class="card-title">长高运动计划</div><div class="card-subtitle">每天坚持运动，促进骨骼生长</div></div></div>
+                <div id="exerciseList"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><div class="card-icon" style="background:#FFF3E0;">🥗</div><div><div class="card-title">长高食物推荐</div><div class="card-subtitle">营养均衡，吃得健康长得高</div></div></div>
+                <div id="foodList"></div>
+            </div>
+            <div class="card" style="background:linear-gradient(135deg,#E8F5E9,#FFF8E1);border:2px dashed #A5D6A7;">
+                <div class="card-title" style="margin-bottom:8px;">📏 身高小贴士</div>
+                <div style="font-size:14px;color:var(--text-medium);line-height:1.8;">
+                    • 保证充足睡眠（晚上8:30前入睡，生长激素分泌高峰在夜间）<br>
+                    • 每天运动30分钟以上（跳绳、摸高跳最有效）<br>
+                    • 多喝牛奶、多吃含钙食物<br>
+                    • 保持愉快心情，快乐才能长高高！<br>
+                    • 定期测量身高体重，记录成长曲线
+                </div>
+            </div>
+        </div>
+
+        <!-- 备忘录 -->
+        <div class="content-section" id="section-memo">
+            <div class="page-title"><span class="icon">📋</span> 一年级入学准备</div>
+            <div class="card" style="background:linear-gradient(135deg,#FFF8E1,#E3F2FD);border:2px dashed #FFB74D;margin-bottom:16px;">
+                <div style="font-size:16px;font-weight:bold;color:var(--text-dark);margin-bottom:4px;">🎒 一年级入学准备清单</div>
+                <div style="font-size:13px;color:var(--text-medium);">逐项打勾确认，做好入学准备！已勾选：<span id="memoProgress" style="font-weight:bold;color:var(--plant-green);">0</span> 项</div>
+            </div>
+            <div id="memoList"></div>
         </div>
 
         <!-- 电子宠物 -->

@@ -5,12 +5,15 @@
 // 导航菜单
 const NAV_ITEMS = [
     {id:'home', name:'花园', icon:'🌻', color:'#42A5F5'},
-    {id:'english', name:'英语', icon:'🗽', color:'#42A5F5'},
-    {id:'thinking', name:'思维', icon:'🧠', color:'#42A5F5'},
     {id:'hanzi', name:'识字', icon:'📚', color:'#42A5F5'},
-    {id:'habit', name:'习惯', icon:'⭐', color:'#AB47BC'},
+    {id:'pinyin', name:'拼音', icon:'🔤', color:'#7E57C2'},
+    {id:'thinking', name:'思维', icon:'🧠', color:'#42A5F5'},
+    {id:'english', name:'英语', icon:'🗽', color:'#42A5F5'},
     {id:'picturebook', name:'绘本', icon:'📖', color:'#42A5F5'},
     {id:'science', name:'科普', icon:'🔬', color:'#66BB6A'},
+    {id:'habit', name:'习惯', icon:'⭐', color:'#AB47BC'},
+    {id:'fitness', name:'健身', icon:'💪', color:'#EF5350'},
+    {id:'memo', name:'备忘', icon:'📋', color:'#FF7043'},
     {id:'pet', name:'宠物', icon:'🐱', color:'#42A5F5'},
     {id:'wrong', name:'错题', icon:'📝', color:'#42A5F5'},
 ];
@@ -512,18 +515,79 @@ const EXERCISE_LIST = [
     {name:'骑自行车',icon:'🚴',detail:'户外骑行',duration:'20分钟',desc:'锻炼腿部'},
 ];
 
-// 备忘录
-const TODO_PRESETS = [
-    {text:'准备书包',category:'supplies',done:false},
-    {text:'准备文具盒和铅笔',category:'supplies',done:false},
-    {text:'准备水杯',category:'supplies',done:false},
-    {text:'准备校服和运动鞋',category:'supplies',done:false},
-    {text:'学习拼音复韵母',category:'study',done:false},
-    {text:'每天读一本绘本',category:'study',done:false},
-    {text:'练习10以内加减法',category:'study',done:false},
-    {text:'练习99乘法表',category:'study',done:false},
-    {text:'每天阅读20分钟',category:'study',done:false},
-    {text:'练习写字',category:'study',done:false},
-    {text:'调整作息时间',category:'life',done:false},
-    {text:'准备红领巾',category:'supplies',done:false},
-];
+// 备忘录 - 一年级入学准备清单
+const TODO_PRESETS = {
+    supplies: {
+        title: '学习用品',
+        icon: '✏️',
+        color: '#E3F2FD',
+        items: [
+            {text:'书包（双肩背带，大小合适）', done:false},
+            {text:'文具盒（简单实用，不花哨）', done:false},
+            {text:'HB铅笔 ×10支（每天带3支削好的）', done:false},
+            {text:'橡皮（白色绘图橡皮，2块）', done:false},
+            {text:'直尺（15cm透明直尺）', done:false},
+            {text:'卷笔刀（家用，不带去学校）', done:false},
+            {text:'水杯（带盖不漏水，贴姓名贴）', done:false},
+            {text:'文件袋（A4大小，3-4个）', done:false},
+            {text:'姓名贴纸（贴所有物品）', done:false},
+            {text:'包书皮（透明自粘型）', done:false},
+        ]
+    },
+    uniform: {
+        title: '服装准备',
+        icon: '👕',
+        color: '#FFF3E0',
+        items: [
+            {text:'校服（春秋2套、夏季2套）', done:false},
+            {text:'运动鞋（白色，粘扣款，2双）', done:false},
+            {text:'红领巾（2条，备用）', done:false},
+            {text:'袜子（纯棉，每天换洗）', done:false},
+            {text:'雨衣/雨伞（小雨衣更方便）', done:false},
+        ]
+    },
+    study: {
+        title: '暑假学习计划',
+        icon: '📖',
+        color: '#E8F5E9',
+        items: [
+            {text:'熟练掌握拼音声母韵母', done:false},
+            {text:'会读会写300个常用汉字', done:false},
+            {text:'10以内加减法口算熟练', done:false},
+            {text:'20以内进退位加减法', done:false},
+            {text:'每天阅读绘本20分钟', done:false},
+            {text:'练习正确的握笔姿势', done:false},
+            {text:'学写自己的名字', done:false},
+            {text:'认识钟表整点和半点', done:false},
+            {text:'认识常见人民币面值', done:false},
+        ]
+    },
+    life: {
+        title: '生活习惯准备',
+        icon: '🏠',
+        color: '#F3E5F5',
+        items: [
+            {text:'调整作息：晚上8:30睡觉', done:false},
+            {text:'调整作息：早上6:30起床', done:false},
+            {text:'学会自己整理书包', done:false},
+            {text:'学会自己穿脱衣服', done:false},
+            {text:'学会自己上厕所（蹲坑）', done:false},
+            {text:'能安静坐满40分钟', done:false},
+            {text:'会举手发言和提问', done:false},
+            {text:'记住爸爸妈妈电话号码', done:false},
+            {text:'知道家庭住址', done:false},
+        ]
+    },
+   心理: {
+        title: '心理准备',
+        icon: '💗',
+        color: '#FFEBEE',
+        items: [
+            {text:'带孩子参观小学校园', done:false},
+            {text:'讲小学有趣的事情（正向引导）', done:false},
+            {text:'认识同小区的同学', done:false},
+            {text:'练习自我介绍', done:false},
+            {text:'培养"我能行"的自信心', done:false},
+        ]
+    },
+};

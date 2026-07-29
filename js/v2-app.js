@@ -29,6 +29,8 @@ const App = {
         this.renderHabits();
         this.renderPictureBooks();
         this.renderScience();
+        this.renderFitness();
+        this.renderMemo();
         this.renderPet();
         this.renderWrong();
         this.updateSun();
@@ -91,11 +93,13 @@ const App = {
         this.updateSun();
         const tasks = [
             {id:'hanzi', icon:'📚', name:'识字'},
+            {id:'pinyin', icon:'🔤', name:'拼音'},
             {id:'math', icon:'🧮', name:'数学思维'},
             {id:'english', icon:'🗽', name:'英语'},
             {id:'science', icon:'🔬', name:'科普'},
             {id:'habit', icon:'⭐', name:'好习惯'},
             {id:'picturebook', icon:'📖', name:'绘本'},
+            {id:'fitness', icon:'💪', name:'健身'},
         ];
         document.getElementById('dailyTasks').innerHTML = tasks.map(t => {
             const done = this.state.tasksCompleted[t.id];
@@ -386,6 +390,77 @@ const App = {
     completeScience() {
         this.addSun(10, '完成科普学习');
         this.completeTask('science');
+    },
+
+    // 健身饮食
+    renderFitness() {
+        const exList = document.getElementById('exerciseList');
+        if (exList) {
+            exList.innerHTML = EXERCISE_LIST.map(e => `<div class="fitness-card">
+                <div class="fitness-icon" style="background:#E8F5E9;">${e.icon}</div>
+                <div class="fitness-info">
+                    <div class="fitness-name">${e.name}</div>
+                    <div class="fitness-detail">${e.detail} · ${e.duration} · ${e.desc}</div>
+                </div>
+            </div>`).join('');
+        }
+        const foodEl = document.getElementById('foodList');
+        if (foodEl) {
+            foodEl.innerHTML = FOOD_LIST.map(f => `<div class="food-card">
+                <div class="food-icon">${f.icon}</div>
+                <div class="food-info">
+                    <div class="food-name">${f.name}</div>
+                    <div class="food-desc">${f.desc}</div>
+                </div>
+            </div>`).join('');
+        }
+    },
+
+    // 备忘录
+    renderMemo() {
+        const container = document.getElementById('memoList');
+        if (!container) return;
+        if (!this.state.memoChecks) this.state.memoChecks = {};
+        let totalDone = 0, totalItems = 0;
+        let html = '';
+        for (let cat in TODO_PRESETS) {
+            const catData = TODO_PRESETS[cat];
+            const catDone = catData.items.filter((_, i) => this.state.memoChecks[cat + '_' + i]).length;
+            totalDone += catDone;
+            totalItems += catData.items.length;
+            const allCatDone = catDone === catData.items.length;
+            html += `<div class="card" style="margin-bottom:12px;">
+                <div class="card-header">
+                    <div class="card-icon" style="background:${catData.color};">${catData.icon}</div>
+                    <div>
+                        <div class="card-title">${catData.title}</div>
+                        <div class="card-subtitle">${catDone} / ${catData.items.length} 已完成 ${allCatDone ? '✅' : ''}</div>
+                    </div>
+                </div>
+                <div class="memo-progress-bar"><div class="memo-progress-fill" style="width:${catDone/catData.items.length*100}%"></div></div>
+                ${catData.items.map((item, i) => {
+                    const checked = this.state.memoChecks[cat + '_' + i];
+                    return `<div class="memo-item ${checked?'done':''}" onclick="App.toggleMemo('${cat}', ${i})">
+                        <div class="memo-check">${checked ? '✅' : '⬜'}</div>
+                        <div class="memo-text ${checked?'memo-text-done':''}">${item.text}</div>
+                    </div>`;
+                }).join('')}
+            </div>`;
+        }
+        container.innerHTML = html;
+        const progEl = document.getElementById('memoProgress');
+        if (progEl) progEl.textContent = totalDone;
+    },
+
+    toggleMemo(cat, i) {
+        if (!this.state.memoChecks) this.state.memoChecks = {};
+        const key = cat + '_' + i;
+        this.state.memoChecks[key] = !this.state.memoChecks[key];
+        if (this.state.memoChecks[key]) {
+            this.addSun(2, '备忘清单完成一项');
+        }
+        this.saveData();
+        this.renderMemo();
     },
 
     // 电子宠物
