@@ -112,7 +112,7 @@ body {
 .sidebar {
     position: fixed;
     left: 0; top: 56px; bottom: 0;
-    width: 90px;
+    width: 70px;
     background: linear-gradient(180deg, #E3F2FD 0%, #F5FBF5 100%);
     padding: 12px 8px;
     overflow-y: auto;
@@ -172,7 +172,7 @@ body {
 
 /* 内容区 */
 .content-area {
-    margin-left: 90px;
+    margin-left: 70px;
     flex: 1;
     padding: 16px;
     min-height: calc(100vh - 56px);
@@ -181,8 +181,7 @@ body {
 .content-section {
     display: none;
     animation: fadeIn 0.4s ease;
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .content-section.active { display: block; }
@@ -956,10 +955,10 @@ body {
     .top-bar .logo-icon { width: 34px; height: 34px; font-size: 20px; }
     .top-bar .logo-text { font-size: 17px; }
     .main-container { margin-top: 48px; min-height: calc(100vh - 48px); }
-    .sidebar { width: 76px; top: 48px; padding: 8px 4px; gap: 6px; }
-    .nav-item { min-height: 58px; padding: 6px 2px; font-size: 11px; gap: 2px; }
-    .nav-item .nav-icon { font-size: 22px; }
-    .content-area { margin-left: 76px; padding: 12px; min-height: calc(100vh - 48px); }
+    .sidebar { width: 64px; top: 48px; padding: 8px 4px; gap: 6px; }
+    .nav-item { min-height: 54px; padding: 6px 2px; font-size: 10px; gap: 2px; }
+    .nav-item .nav-icon { font-size: 20px; }
+    .content-area { margin-left: 64px; padding: 12px; min-height: calc(100vh - 48px); }
     .card { padding: 14px; border-radius: 16px; }
     .card-title { font-size: 15px; }
     .card-subtitle { font-size: 11px; }
@@ -1024,10 +1023,10 @@ body {
     .top-bar .logo-icon { width: 34px; height: 34px; font-size: 20px; }
     .top-bar .logo-text { font-size: 17px; }
     .main-container { margin-top: 48px; min-height: calc(100vh - 48px); }
-    .sidebar { width: 76px; top: 48px; padding: 8px 4px; gap: 6px; }
-    .nav-item { min-height: 58px; padding: 6px 2px; font-size: 11px; gap: 2px; }
-    .nav-item .nav-icon { font-size: 22px; }
-    .content-area { margin-left: 76px; padding: 12px; min-height: calc(100vh - 48px); }
+    .sidebar { width: 64px; top: 48px; padding: 8px 4px; gap: 6px; }
+    .nav-item { min-height: 54px; padding: 6px 2px; font-size: 10px; gap: 2px; }
+    .nav-item .nav-icon { font-size: 20px; }
+    .content-area { margin-left: 64px; padding: 12px; min-height: calc(100vh - 48px); }
     .card { padding: 14px; border-radius: 16px; }
     .card-header { gap: 8px; margin-bottom: 10px; }
     .card-title { font-size: 15px; }
@@ -1092,10 +1091,10 @@ body {
     .top-bar .logo-icon { width: 36px; height: 36px; font-size: 21px; }
     .top-bar .logo-text { font-size: 18px; }
     .main-container { margin-top: 50px; min-height: calc(100vh - 50px); }
-    .sidebar { width: 82px; top: 50px; padding: 10px 5px; gap: 8px; }
-    .nav-item { min-height: 62px; padding: 7px 2px; font-size: 12px; gap: 3px; }
-    .nav-item .nav-icon { font-size: 23px; }
-    .content-area { margin-left: 82px; padding: 14px; min-height: calc(100vh - 50px); }
+    .sidebar { width: 70px; top: 50px; padding: 10px 4px; gap: 7px; }
+    .nav-item { min-height: 56px; padding: 7px 2px; font-size: 11px; gap: 3px; }
+    .nav-item .nav-icon { font-size: 22px; }
+    .content-area { margin-left: 70px; padding: 14px; min-height: calc(100vh - 50px); }
     .card { padding: 16px; }
     .page-title { font-size: 19px; margin-bottom: 14px; }
     .hanzi-grid { grid-template-columns: repeat(6, 1fr); }
