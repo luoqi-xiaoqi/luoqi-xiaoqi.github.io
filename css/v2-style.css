@@ -811,6 +811,57 @@ body {
     .hanzi-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ==================== 平板适配 (iPad mini 等) ==================== */
+/* 平板竖屏 768px~1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar { width: 88px; padding: 10px 4px; }
+    .nav-item { min-height: 66px; padding: 8px 2px; font-size: 12px; }
+    .nav-item .nav-icon { font-size: 24px; }
+    .content-area { margin-left: 88px; padding: 16px; }
+    .top-bar { padding: 0 16px; }
+    .logo-text { font-size: 20px; }
+    /* 内容卡片在平板上可以更宽 */
+    .hanzi-grid { grid-template-columns: repeat(5, 1fr); }
+    .pinyin-grid { grid-template-columns: repeat(6, 1fr); }
+    .english-words { grid-template-columns: repeat(3, 1fr); }
+    .daily-tasks { grid-template-columns: repeat(3, 1fr); }
+    .resource-grid { grid-template-columns: repeat(3, 1fr); }
+    .picturebook-list { grid-template-columns: repeat(3, 1fr); }
+    .pet-stats { grid-template-columns: repeat(4, 1fr); }
+    .pet-actions { grid-template-columns: repeat(5, 1fr); }
+    .garden-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 平板横屏 1025px~1366px, 高度≥768px */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .sidebar { width: 96px; }
+    .nav-item { min-height: 70px; font-size: 13px; }
+    .nav-item .nav-icon { font-size: 26px; }
+    .content-area { margin-left: 96px; padding: 18px; }
+    .hanzi-grid { grid-template-columns: repeat(6, 1fr); }
+    .pinyin-grid { grid-template-columns: repeat(8, 1fr); }
+    .english-words { grid-template-columns: repeat(4, 1fr); }
+    .daily-tasks { grid-template-columns: repeat(4, 1fr); }
+    .resource-grid { grid-template-columns: repeat(3, 1fr); }
+    .picturebook-list { grid-template-columns: repeat(4, 1fr); }
+    .pet-stats { grid-template-columns: repeat(4, 1fr); }
+    .pet-actions { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* 平板横屏特殊：高度<500px（如iPad mini分屏模式） */
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 500px) {
+    .sidebar {
+        width: 100%; height: 56px;
+        top: 56px; left: 0; right: 0; bottom: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 4px 6px;
+    }
+    .nav-item { min-width: 64px; min-height: 44px; flex-direction: column; font-size: 10px; }
+    .nav-item .nav-icon { font-size: 20px; }
+    .content-area { margin-left: 0; margin-top: 56px; padding: 10px; }
+}
+
 /* 横屏优化 */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
     .sidebar {
