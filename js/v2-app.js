@@ -20,6 +20,7 @@ const App = {
 
     init() {
         this.loadData();
+        this.dailyReset();
         this.renderNav();
         this.renderHome();
         this.renderHanzi();
@@ -42,6 +43,45 @@ const App = {
         if (saved) Object.assign(this.state, JSON.parse(saved));
     },
 
+    // 获取今天日期字符串 YYYY-MM-DD
+    todayStr() {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    },
+
+    // 每日重置：新的一天自动清空打卡状态，记录打卡日期
+    dailyReset() {
+        const today = this.todayStr();
+        if (this.state.lastActiveDate !== today) {
+            // 新的一天：重置每日任务
+            this.state.tasksCompleted = { hanzi:false, math:false, english:false, science:false, habit:false, picturebook:false };
+            // 重置每日习惯打卡（保留累计统计在 habitsTotal 里）
+            if (!this.state.habitsTotal) this.state.habitsTotal = {};
+            this.state.habits = {};
+            // 记录打卡日期
+            if (!this.state.checkinDates) this.state.checkinDates = {};
+            this.state.checkinDates[today] = true;
+            // 计算连续打卡天数
+            this.state.lastActiveDate = today;
+            this.saveData();
+        }
+    },
+
+    // 计算连续打卡天数
+    streakDays() {
+        const dates = Object.keys(this.state.checkinDates || {}).sort();
+        if (dates.length === 0) return 1;
+        let streak = 1;
+        for (let i = dates.length - 1; i > 0; i--) {
+            const prev = new Date(dates[i-1]);
+            const curr = new Date(dates[i]);
+            const diff = (curr - prev) / (1000 * 60 * 60 * 24);
+            if (diff === 1) streak++;
+            else break;
+        }
+        return streak;
+    },
+
     saveData() {
         localStorage.setItem('jingmingStudyV2', JSON.stringify(this.state));
     },
@@ -53,7 +93,7 @@ const App = {
         const homeStar = document.getElementById('homeStar');
         if (homeStar) homeStar.textContent = this.state.star;
         const homeDay = document.getElementById('homeDay');
-        if (homeDay) homeDay.textContent = Object.keys(this.state.checkinDates).length + 1;
+        if (homeDay) homeDay.textContent = this.streakDays();
     },
 
     addSun(amount, reason='') {
@@ -127,11 +167,13 @@ const App = {
             </div>`;
         }).join('');
 
-        // 显示今天星期几 + 课表说明
+        // 显示今天星期几 + 课表说明 + 今日进度
         const weekNames = ['日','一','二','三','四','五','六'];
         const todayLabel = `星期${weekNames[dayOfWeek]}`;
+        const doneCount = tasks.filter(t => this.state.tasksCompleted[t.id]).length;
+        const totalDays = Object.keys(this.state.checkinDates || {}).length;
         const scheduleNote = document.getElementById('scheduleNote');
-        if (scheduleNote) scheduleNote.innerHTML = `📅 今天${todayLabel} · 每日必做：拼音/英语/数学 · 今日轮换：${rotation.map(t=>t.name).join('、')}`;
+        if (scheduleNote) scheduleNote.innerHTML = `📅 今天${todayLabel} · 每日必做：拼音/英语/数学 · 今日轮换：${rotation.map(t=>t.name).join('、')}<br>📊 今日完成：${doneCount}/${tasks.length} · 累计打卡：${totalDays}天 · 连续：${this.streakDays()}天`;
 
         document.getElementById('homeRewards').innerHTML = REWARD_LIST.slice(0,2).map(r => {
             const can = this.state.sun >= r.cost;
