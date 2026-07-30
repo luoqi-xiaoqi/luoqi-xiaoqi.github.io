@@ -764,6 +764,30 @@ const App = {
             this.toast('❌ 数据格式错误，请检查粘贴的内容');
         }
     },
+
+    // 下载离线版文件到本地
+    downloadOffline() {
+        fetch('jingming-offline.html')
+            .then(r => {
+                if (!r.ok) throw new Error('网络错误');
+                return r.text();
+            })
+            .then(html => {
+                const blob = new Blob([html], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = '靖铭学习工作台-离线版.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                this.toast('📥 离线版已开始下载，请去"文件"App查看');
+            })
+            .catch(e => {
+                this.toast('❌ 下载失败：' + e.message);
+            });
+    },
 };
 
 document.addEventListener('DOMContentLoaded', () => App.init());

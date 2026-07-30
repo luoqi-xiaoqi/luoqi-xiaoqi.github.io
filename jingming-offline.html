@@ -1356,11 +1356,12 @@ body {
                 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
                     <button class="btn btn-blue" onclick="App.exportData()">📤 导出数据</button>
                     <button class="btn btn-green" onclick="App.importData()">📥 导入数据</button>
+                    <button class="btn btn-yellow" onclick="App.downloadOffline()">📥 保存离线版</button>
                 </div>
                 <div style="margin-top:10px;font-size:12px;color:var(--text-light);line-height:1.6;">
                     💡 <b>导出</b>：把当前学习数据复制到剪贴板<br>
                     💡 <b>导入</b>：粘贴之前导出的数据，恢复进度<br>
-                    💡 换设备/换链接前先导出，到新设备上导入即可
+                    💡 <b>保存离线版</b>：把页面文件下载到平板，没网也能用
                 </div>
                 <textarea id="dataTransferBox" style="display:none;width:100%;min-height:100px;margin-top:10px;font-size:11px;border-radius:8px;border:2px solid #E0E0E0;padding:8px;" placeholder="导出的数据会显示在这里，复制后到新设备粘贴导入..."></textarea>
             </div>
@@ -2827,6 +2828,21 @@ const App = {
         } catch(e) {
             this.toast('❌ 数据格式错误，请检查粘贴的内容');
         }
+    },
+
+    // 下载离线版文件到本地
+    downloadOffline() {
+        const html = document.documentElement.outerHTML;
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '靖铭学习工作台-离线版.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        this.toast('📥 离线版已开始下载，请去"文件"App查看');
     },
 };
 
